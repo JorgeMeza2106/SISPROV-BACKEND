@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unmsm.sisprov.entity.Producto;
+import com.unmsm.sisprov.model.ProductoInfoModel;
 import com.unmsm.sisprov.model.ProductoModel;
 import com.unmsm.sisprov.repository.IProductoRepo;
+import com.unmsm.sisprov.service.impl.ProductoInfoService;
 import com.unmsm.sisprov.service.impl.ProductoService;
 
 @RestController
@@ -26,9 +28,17 @@ public class ProductoController {
 	@Autowired
 	ProductoService productoService;
 	
+	@Autowired
+	ProductoInfoService productoInfoService;
+	
 	@GetMapping("/listar")
 	public List<ProductoModel> listarProductos(){
 		return productoService.listarProductos();
+	}
+	
+	@GetMapping("/listarinfo")
+	public List<ProductoInfoModel> listarProductosInfoBasica(){
+		return productoInfoService.listar();
 	}
 	
 	@GetMapping("/buscar/{idProd}")

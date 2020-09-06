@@ -29,7 +29,7 @@ public class CategoriaTransform implements Transform<CategoriaModel, Categoria>{
 		
 		categoriaModel.setId_cat(oEntity.getIdCategoria());
 		categoriaModel.setNombre(oEntity.getNombreCat());
-		categoriaModel.setDescrip(oEntity.getDescripCat());
+		categoriaModel.setDescrip(oEntity.getDescripCat() == null ? "" : oEntity.getDescripCat());
 		
 		return categoriaModel;
 	}

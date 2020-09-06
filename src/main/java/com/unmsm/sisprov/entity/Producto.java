@@ -25,6 +25,7 @@ public class Producto implements java.io.Serializable {
 	private String nombre;
 	private String descripcion;
 	private Integer stock;
+	private String img;
 	private BigDecimal precio;
 	private Set<Proformadetalle> proformadetalles = new HashSet<Proformadetalle>(0);
 
@@ -36,7 +37,7 @@ public class Producto implements java.io.Serializable {
 		this.categoria = categoria;
 	}
 
-	public Producto(int idProducto, Categoria categoria, String nombre, String descripcion, Integer stock,
+	public Producto(int idProducto, Categoria categoria, String nombre, String descripcion, Integer stock, String img,
 			BigDecimal precio, Set<Proformadetalle> proformadetalles) {
 		this.idProducto = idProducto;
 		this.categoria = categoria;
@@ -44,6 +45,7 @@ public class Producto implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.stock = stock;
 		this.precio = precio;
+		this.img = img;
 		this.proformadetalles = proformadetalles;
 	}
 
@@ -102,6 +104,15 @@ public class Producto implements java.io.Serializable {
 
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
+	}
+	
+	@Column(name = "img", length = 200)
+	public String getImg() {
+		return this.img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto")

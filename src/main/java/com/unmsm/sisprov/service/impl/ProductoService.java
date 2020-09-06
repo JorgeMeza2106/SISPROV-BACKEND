@@ -39,6 +39,9 @@ public class ProductoService implements IProductoService{
 	@Override
 	public void registrarProducto(ProductoModel prod) {
 		if(prod != null) {
+			long nroProducto = productoRepo.count() + 1;
+			int codigo_prod =  (int) nroProducto;
+			prod.setId_prod(codigo_prod);
 			productoRepo.save(prodTransform.transformME(prod));
 		}
 	}

@@ -27,6 +27,7 @@ public class ProductoTransform implements Transform<ProductoModel, Producto>{
 		prodEntity.setDescripcion(oModel.getDescrip());
 		prodEntity.setPrecio(new BigDecimal(oModel.getPrecio()));
 		prodEntity.setStock(oModel.getStock());
+		prodEntity.setImg(oModel.getImg());
 		
 		Categoria categoriaEntity = new Categoria();
 		categoriaEntity.setIdCategoria(oModel.getCategoria().getId_cat());
@@ -48,9 +49,10 @@ public class ProductoTransform implements Transform<ProductoModel, Producto>{
 		
 		productoModel.setId_prod(oEntity.getIdProducto());
 		productoModel.setNombre(oEntity.getNombre());
-		productoModel.setDescrip(oEntity.getDescripcion());
+		productoModel.setDescrip(oEntity.getDescripcion() == null ? "" : oEntity.getDescripcion());
 		productoModel.setPrecio(oEntity.getPrecio().floatValue());
 		productoModel.setStock(oEntity.getStock());
+		productoModel.setImg(oEntity.getImg() == null ? "" : oEntity.getImg());
 		
 		CategoriaModel categoria = categoriaTransform.transformEM(oEntity.getCategoria());
 		productoModel.setCategoria(categoria);
