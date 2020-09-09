@@ -12,30 +12,33 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 
 @Configuration
 public class RabbitMQConfig {
 
-	@Value("${javainuse.rabbitmq.queue}")
-	String queueName;
+	
+	@Value("${publisher.rabbitmq.queue}")
+	String queueProformaName;
 
-	@Value("${javainuse.rabbitmq.exchange}")
+	@Value("${publisher.rabbitmq.exchange}")
 	String exchange;
 
-	@Value("${javainuse.rabbitmq.routingkey}")
+	@Value("${publisher.rabbitmq.routingkey}")
 	private String routingkey;
-
+	
 	@Bean
-	Queue queue() {
-		return new Queue(queueName, true);
+	@Primary
+	Queue proformaQueue() {
+		return new Queue(queueProformaName, true);
 	}
 
 	@Bean
 	DirectExchange exchange() {
 		return new DirectExchange(exchange);
 	}
-
+	
 	@Bean
 	Binding binding(Queue queue, DirectExchange exchange) {
 		return BindingBuilder.bind(queue).to(exchange).with(routingkey);

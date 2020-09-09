@@ -22,7 +22,8 @@ public class Proformadetalle implements java.io.Serializable {
 	private ProformadetalleId id;
 	private Producto producto;
 	private Proforma proforma;
-	private BigDecimal monto;
+	private BigDecimal submonto;
+	private int cantidad;
 
 	public Proformadetalle() {
 	}
@@ -33,11 +34,11 @@ public class Proformadetalle implements java.io.Serializable {
 		this.proforma = proforma;
 	}
 
-	public Proformadetalle(ProformadetalleId id, Producto producto, Proforma proforma, BigDecimal monto) {
+	public Proformadetalle(ProformadetalleId id, Producto producto, Proforma proforma, BigDecimal submonto) {
 		this.id = id;
 		this.producto = producto;
 		this.proforma = proforma;
-		this.monto = monto;
+		this.submonto = submonto;
 	}
 
 	@EmbeddedId
@@ -72,13 +73,22 @@ public class Proformadetalle implements java.io.Serializable {
 		this.proforma = proforma;
 	}
 
-	@Column(name = "monto", precision = 10)
-	public BigDecimal getMonto() {
-		return this.monto;
+	@Column(name = "submonto", precision = 10)
+	public BigDecimal getSubmonto() {
+		return this.submonto;
 	}
 
-	public void setMonto(BigDecimal monto) {
-		this.monto = monto;
+	public void setSubmonto(BigDecimal submonto) {
+		this.submonto = submonto;
+	}
+	
+	@Column(name = "cantidad")
+	public int getCantidad() {
+		return this.cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 }

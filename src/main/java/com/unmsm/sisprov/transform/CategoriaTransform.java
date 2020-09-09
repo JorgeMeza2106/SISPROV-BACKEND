@@ -24,7 +24,7 @@ public class CategoriaTransform implements Transform<CategoriaModel, Categoria>{
 	}
 
 	@Override
-	public CategoriaModel transformEM(Categoria oEntity) {
+	public CategoriaModel transformEM(Categoria oEntity,boolean cascada) {
 		CategoriaModel categoriaModel = new CategoriaModel();
 		
 		categoriaModel.setId_cat(oEntity.getIdCategoria());
@@ -35,10 +35,10 @@ public class CategoriaTransform implements Transform<CategoriaModel, Categoria>{
 	}
 
 	@Override
-	public List<CategoriaModel> transformEM(List<Categoria> lEntity) {
+	public List<CategoriaModel> transformEM(List<Categoria> lEntity, boolean cascada) {
 		List<CategoriaModel> categorias = new ArrayList<>();
 		for(Categoria categoriaEntity : lEntity) {
-			categorias.add(transformEM(categoriaEntity));
+			categorias.add(transformEM(categoriaEntity, cascada));
 		}
 		return categorias;
 	}

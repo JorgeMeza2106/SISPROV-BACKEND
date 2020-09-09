@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unmsm.sisprov.model.ProformaReceiveModel;
 import com.unmsm.sisprov.service.impl.RabbitMQSender;
 
 @RestController
@@ -18,7 +19,17 @@ public class RabbitMQController {
 	
 	@GetMapping(value = "/producer")
 	public String producer() {
-		rabbitMQSender.send("Hola mundo, desde Jorge SpringBoot");
-		return "Message sent to the RabbitMQ JavaInUse Successfully";
+		ProformaReceiveModel proformas[] = new ProformaReceiveModel[2];
+		proformas[0]  = new ProformaReceiveModel();
+		
+		proformas[0].setProductId(0);
+		proformas[0].setQuantity(3);
+		
+proformas[1]  = new ProformaReceiveModel();
+		
+		proformas[1].setProductId(1);
+		proformas[1].setQuantity(2);
+		rabbitMQSender.send(proformas);
+		return "Message sent to the RabbitMQ Successfully: "+proformas.toString();
 	}
 }

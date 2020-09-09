@@ -7,7 +7,7 @@ import com.unmsm.sisprov.model.ProductoModel;
 public interface IProductoService {
 
 	public List<ProductoModel> listarProductos();
-	public ProductoModel buscarProducto(int id);
+	public ProductoModel buscarProducto(int id, boolean cascada);
 	public void registrarProducto(ProductoModel prod);
 	public void actualizarProducto(ProductoModel prod);
 	

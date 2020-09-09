@@ -24,7 +24,7 @@ public class ProductoInfoService implements IProductoInfoService{
 	public List<ProductoInfoModel> listar() {
 		List<Producto> productosEntity = productoRepo.findAll();
 		if(productosEntity != null) {
-			return productoInfoTransform.transformEM(productosEntity);
+			return productoInfoTransform.transformEM(productosEntity, true);
 		}
 		return null;
 	}

@@ -2,6 +2,7 @@ package com.unmsm.sisprov.transform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,6 @@ import com.unmsm.sisprov.model.ProductoModel;
 @Component
 public class ProductoInfoTransform implements Transform<ProductoInfoModel, Producto> {
 
-	@Autowired
-	CategoriaTransform categoriaTransform;
-
 	@Override
 	public Producto transformME(ProductoInfoModel oModel) {
 		// TODO Auto-generated method stub
@@ -25,29 +23,28 @@ public class ProductoInfoTransform implements Transform<ProductoInfoModel, Produ
 
 	@Override
 	public List<Producto> transformME(List<ProductoInfoModel> lModel) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ProductoInfoModel transformEM(Producto oEntity) {
+	public ProductoInfoModel transformEM(Producto oEntity, boolean cascada) {
 		ProductoInfoModel productoInfoModel = new ProductoInfoModel();
 
 		productoInfoModel.setId_prod(oEntity.getIdProducto());
 		productoInfoModel.setNombre(oEntity.getNombre());
 		productoInfoModel.setDescrip(oEntity.getDescripcion() == null ? "" : oEntity.getDescripcion());
-
-		CategoriaModel categoria = categoriaTransform.transformEM(oEntity.getCategoria());
-		productoInfoModel.setCategoria(categoria);
-
+		productoInfoModel.setId_cat(oEntity.getCategoria().getIdCategoria());
+		productoInfoModel.setNomb_cat(oEntity.getCategoria().getNombreCat());
+		productoInfoModel.setDescrip_cat(oEntity.getCategoria().getDescripCat());
+		
 		return productoInfoModel;
 	}
 
 	@Override
-	public List<ProductoInfoModel> transformEM(List<Producto> lEntity) {
+	public List<ProductoInfoModel> transformEM(List<Producto> lEntity, boolean cascada) {
 		List<ProductoInfoModel> productos = new ArrayList<>();
 		for (Producto productoEntity : lEntity) {
-			productos.add(transformEM(productoEntity));
+			productos.add(transformEM(productoEntity, cascada));
 		}
 		return productos;
 	}

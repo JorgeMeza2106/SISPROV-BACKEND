@@ -4,15 +4,27 @@ public class ProductoInfoModel {
 	private int id_prod;
 	private String nombre;
 	private String descrip;
-	private CategoriaModel categoria;
+	private int id_cat;
+	private String nomb_cat;
+	private String descrip_cat;
 	
-	
-
-	public CategoriaModel getCategoria() {
-		return categoria;
+	public int getId_cat() {
+		return id_cat;
 	}
-	public void setCategoria(CategoriaModel categoria) {
-		this.categoria = categoria;
+	public void setId_cat(int id_cat) {
+		this.id_cat = id_cat;
+	}
+	public String getNomb_cat() {
+		return nomb_cat;
+	}
+	public void setNomb_cat(String nomb_cat) {
+		this.nomb_cat = nomb_cat;
+	}
+	public String getDescrip_cat() {
+		return descrip_cat;
+	}
+	public void setDescrip_cat(String descrip_cat) {
+		this.descrip_cat = descrip_cat;
 	}
 	public int getId_prod() {
 		return id_prod;
@@ -32,6 +44,5 @@ public class ProductoInfoModel {
 	public void setDescrip(String descrip) {
 		this.descrip = descrip;
 	}
-	
 	
 }

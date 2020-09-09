@@ -24,7 +24,7 @@ public class CategoriaService implements ICategoriaService {
 	public List<CategoriaModel> listarCategorias() {
 		List<Categoria> categoriasEntity = categoriaRepo.findAll();
 		if(categoriasEntity != null) {
-			return categoriaTransform.transformEM(categoriasEntity);
+			return categoriaTransform.transformEM(categoriasEntity,true);
 		}else {
 			return null;
 		}

@@ -45,7 +45,7 @@ public class ProductoController {
 	public ProductoModel buscarProducto(
 			@PathVariable("idProd") int idProd
 			){
-		return productoService.buscarProducto(idProd);
+		return productoService.buscarProducto(idProd, true);
 	}
 	
 	@PostMapping("/registrar")

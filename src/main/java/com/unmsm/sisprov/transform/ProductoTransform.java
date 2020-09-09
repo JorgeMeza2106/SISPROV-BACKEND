@@ -30,7 +30,7 @@ public class ProductoTransform implements Transform<ProductoModel, Producto>{
 		prodEntity.setImg(oModel.getImg());
 		
 		Categoria categoriaEntity = new Categoria();
-		categoriaEntity.setIdCategoria(oModel.getCategoria().getId_cat());
+		categoriaEntity.setIdCategoria(oModel.getId_cat());
 		
 		prodEntity.setCategoria(categoriaEntity);
 		
@@ -44,7 +44,7 @@ public class ProductoTransform implements Transform<ProductoModel, Producto>{
 	}
 
 	@Override
-	public ProductoModel transformEM(Producto oEntity) {
+	public ProductoModel transformEM(Producto oEntity, boolean cascada) {
 		ProductoModel productoModel = new ProductoModel();
 		
 		productoModel.setId_prod(oEntity.getIdProducto());
@@ -53,18 +53,20 @@ public class ProductoTransform implements Transform<ProductoModel, Producto>{
 		productoModel.setPrecio(oEntity.getPrecio().floatValue());
 		productoModel.setStock(oEntity.getStock());
 		productoModel.setImg(oEntity.getImg() == null ? "" : oEntity.getImg());
-		
-		CategoriaModel categoria = categoriaTransform.transformEM(oEntity.getCategoria());
-		productoModel.setCategoria(categoria);
+		productoModel.setId_cat(oEntity.getCategoria().getIdCategoria());
+		if(cascada) {
+			productoModel.setNomb_cat(oEntity.getCategoria().getNombreCat());
+			productoModel.setDescrip_cat(oEntity.getCategoria().getDescripCat());
+		}
 		
 		return productoModel;
 	}
 
 	@Override
-	public List<ProductoModel> transformEM(List<Producto> lEntity) {
+	public List<ProductoModel> transformEM(List<Producto> lEntity, boolean cascada) {
 		List<ProductoModel> productos = new ArrayList<>();
 		for(Producto productoEntity : lEntity) {
-			productos.add(transformEM(productoEntity));
+			productos.add(transformEM(productoEntity, cascada));
 		}
 		return productos;
 	}

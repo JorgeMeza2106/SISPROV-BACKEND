@@ -23,14 +23,14 @@ public class ProductoService implements IProductoService{
 	
 	@Override
 	public List<ProductoModel> listarProductos() {
-		return prodTransform.transformEM(productoRepo.findAll());
+		return prodTransform.transformEM(productoRepo.findAll(), true);
 	}
 
 	@Override
-	public ProductoModel buscarProducto(int id) {
+	public ProductoModel buscarProducto(int id, boolean cascada) {
 		Optional<Producto> prodEntity = productoRepo.findById(id);
 		if(prodEntity.isPresent()) {
-			return prodTransform.transformEM(prodEntity.get());	
+			return prodTransform.transformEM(prodEntity.get(), cascada);	
 		}else {
 			return null;
 		}

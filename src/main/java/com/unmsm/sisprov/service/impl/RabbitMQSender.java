@@ -5,21 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.unmsm.sisprov.model.CategoriaModel;
+import com.unmsm.sisprov.model.ProformaReceiveModel;
+import com.unmsm.sisprov.model.ProformadetalleModel;
+
 @Service
 public class RabbitMQSender {
 
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 	
-	@Value("${javainuse.rabbitmq.exchange}")
+	@Value("${publisher.rabbitmq.exchange}")
 	private String exchange;
 	
-	@Value("${javainuse.rabbitmq.routingkey}")
+	@Value("${publisher.rabbitmq.routingkey}")
 	private String routingkey;
 	
-	public void send(String mensaje) {
+	public void send(ProformaReceiveModel[] mensaje) {
 		rabbitTemplate.convertAndSend(exchange, routingkey, mensaje);
-		System.out.println("Send msg = " + mensaje);
-	    
 	}
+	
 }
