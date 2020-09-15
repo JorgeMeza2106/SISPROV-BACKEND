@@ -2,6 +2,7 @@ package com.unmsm.sisprov.service.impl;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import com.unmsm.sisprov.model.CategoriaModel;
@@ -23,8 +24,7 @@ public class RabbitMQConsumer {
 	
 	@RabbitListener(queues = "${consumer.rabbitmq.queue}")
 	public void recievedMessage(ProformaReceiveModel[] mensaje) {
-		System.out.println("Numero de elementos recibidos: "+ mensaje.length);
-		
+		System.out.println("Numero de elementos recibidos: "+ mensaje.length);		
 		ProformadetalleModel[] proformas = proformaDetailService.cotizarProductos(mensaje);
 		rabbitSender.send(proformas);
 		

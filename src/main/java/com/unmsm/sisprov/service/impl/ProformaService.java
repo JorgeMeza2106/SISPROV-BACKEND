@@ -28,7 +28,7 @@ public class ProformaService implements IProformaService{
 	public List<ProformaModel> listar() {
 		List<Proforma> proformas = proformaRepo.findAll();
 		if(proformas != null) {
-			System.out.println("entre a if en servuce");
+			System.out.println("entre a if en servce");
 			return proformaTransform.transformEM(proformas, true);
 		}
 		return null;
@@ -47,7 +47,7 @@ public class ProformaService implements IProformaService{
 			System.out.println("appoitid: "+ profs[i].getAppointmentId());
 			montoTotal += profs[i].getSubmonto();
 		}
-		proforma.setCliente("Clinica Dental");
+		proforma.setCliente("Smile Dent");
 		Date fechaActual = new Date();
 		proforma.setFecha(fechaActual);
 		proforma.setIdProforma(profs[0].getAppointmentId());

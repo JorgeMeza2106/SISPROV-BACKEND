@@ -19,18 +19,6 @@ public class RabbitMQController {
 	
 	@GetMapping(value = "/producer")
 	public String producer() {
-		ProformaReceiveModel proformas[] = new ProformaReceiveModel[2];
-		proformas[0]  = new ProformaReceiveModel();
-		proformas[0].setProductId(0);
-		proformas[0].setQuantity(3);
-		proformas[0].setAppointmentId(101);
-		
-		proformas[1]  = new ProformaReceiveModel();
-		proformas[1].setProductId(1);
-		proformas[1].setQuantity(2);
-		proformas[1].setAppointmentId(101);
-		
-		rabbitMQSender.send(proformas);
-		return "Message sent to the RabbitMQ Successfully: "+proformas.toString();
+		return "Prueba";
 	}
 }
