@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unmsm.sisprov.model.CategoriaModel;
+import com.unmsm.sisprov.model.ProformaModel;
 import com.unmsm.sisprov.model.ProformaReceiveModel;
 import com.unmsm.sisprov.model.ProformadetalleModel;
 
@@ -12,21 +13,24 @@ import com.unmsm.sisprov.model.ProformadetalleModel;
 public class RabbitMQConsumer {
 
 	@Autowired
-	ProformaDetalleService profService;
+	ProformaDetalleService proformaDetailService;
+	
+	@Autowired
+	ProformaService proformaService;
 	
 	@Autowired
 	RabbitMQSender rabbitSender;
 	
 	@RabbitListener(queues = "${consumer.rabbitmq.queue}")
 	public void recievedMessage(ProformaReceiveModel[] mensaje) {
-		System.out.println("data: "+ mensaje[0].getProductId());
-		System.out.println("data: "+ mensaje[0].getQuantity());
-		ProformadetalleModel[] proformas = profService.cotizarProductos(mensaje);
+		System.out.println("Numero de elementos recibidos: "+ mensaje.length);
 		
-		System.out.println("res 1 coti: "+ proformas[0].getSubmonto()); 
-		System.out.println("res 2coti: "+ proformas[0].getSubmonto());
-
+		ProformadetalleModel[] proformas = proformaDetailService.cotizarProductos(mensaje);
 		rabbitSender.send(proformas);
+		
+		ProformaModel profNueva = proformaService.calcularTotal(proformas);
+		proformaService.registrar(profNueva);
+		System.out.println("Se registro nueva proforma");
 	}
 	
 }

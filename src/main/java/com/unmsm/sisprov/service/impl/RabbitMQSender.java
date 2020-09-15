@@ -23,6 +23,7 @@ public class RabbitMQSender {
 	
 	public void send(ProformaReceiveModel[] mensaje) {
 		rabbitTemplate.convertAndSend(exchange, routingkey, mensaje);
+		System.out.println("Se envió mensaje a RabbitMQ");
 	}
 	
 }

@@ -3,7 +3,15 @@ package com.unmsm.sisprov.model;
 public class ProformaReceiveModel {
 	private int productId;
 	private int quantity;
+	private int appointmentId;
 	
+	
+	public int getAppointmentId() {
+		return appointmentId;
+	}
+	public void setAppointmentId(int appointmentId) {
+		this.appointmentId = appointmentId;
+	}
 	public int getProductId() {
 		return productId;
 	}

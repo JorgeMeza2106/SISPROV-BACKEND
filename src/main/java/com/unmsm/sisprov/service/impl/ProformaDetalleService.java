@@ -29,10 +29,8 @@ public class ProformaDetalleService implements IProformaDetalleService{
 			proformasCot[i].setProductId(idProd);
 			proformasCot[i].setProformaId(0);
 			proformasCot[i].setQuantity(cant);
-			System.out.println("precio: "+ prodModel.getPrecio());
-
+			proformasCot[i].setAppointmentId(prof[i].getAppointmentId());
 			proformasCot[i].setSubmonto(cant*prodModel.getPrecio());
-			System.out.println("coti: "+ proformasCot[i].getSubmonto());
 		}
 		return proformasCot;
 	}
